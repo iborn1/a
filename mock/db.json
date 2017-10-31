@@ -1,0 +1,68 @@
+{
+  "getNewsList": [
+    {
+      "id": 1,
+      "title": "微软封杀7代酷睿更新Win7机制已被破解"
+    },
+    {
+      "id": 2,
+      "title": "腾讯WeGame平台宣传视频放出 暂无后续"
+    },
+    {
+      "id": 3,
+      "title": "Kindle免费书领取活动 第3日图书简介"
+    },
+    {
+      "id": 4,
+      "title": "勒索病毒WannaCry引起我们什么反思？"
+    }
+  ],
+  "login": {
+    "username": "djiango",
+    "userId": 123456
+  },
+  "register": {
+    "username": "djiango",
+    "userId": 123456
+  },
+  "getPrice": {
+    "amount": 999
+  },
+  "createOrder": {
+    "orderId": "djiango"
+  },
+  "checkOrder": {
+    "orderId": "djiango"
+  },
+  "getOrderList": {
+    "list": [
+      {
+        "orderId": "1",
+        "product": "WebStorm",
+        "version": "高级版",
+        "period": "1年",
+        "buyNum": 2,
+        "date": "2017-5-10",
+        "amount": "666元"
+      },
+      {
+        "orderId": "2",
+        "product": "Eclipse",
+        "version": "户外版",
+        "period": "3个月",
+        "buyNum": 1,
+        "date": "2017-6-2",
+        "amount": "2200元"
+      },
+      {
+        "orderId": "3",
+        "product": "Axure",
+        "version": "商铺版",
+        "period": "2年",
+        "buyNum": 12,
+        "date": "2017-7-3",
+        "amount": "7890元"
+      }
+    ]
+  }
+}
