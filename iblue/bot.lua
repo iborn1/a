@@ -1226,6 +1226,14 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
         delete_msg(chat,msgs)
 	end
    end
+      if database:get('bot:word:mute'..msg.chat_id_) and not is_mod(msg.sender_user_id_, msg.chat_id_) then
+	if  then
+     local id = msg.id_
+        local msgs = {[0] = id}
+        local chat = msg.chat_id_
+        delete_msg(chat,msgs)
+	end
+   end test23
       if database:get('bot:arabic:mute'..msg.chat_id_) and not is_mod(msg.sender_user_id_, msg.chat_id_) then
 	if text:match("[\216-\219][\128-\191]") then
      local id = msg.id_
@@ -1259,6 +1267,24 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[!/#]leave$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
 	     chat_leave(msg.chat_id_, 259460597)
+    end
+	-----------------------------------------------------------------------------------------------
+	if text:match("^[#!/]addword (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	local ap = {string.match(text, "^[#/!](addword) @(.*)$")} 
+	if result.id_ then
+	if is_mod(result.id_, msg.chat_id_) then
+         send(msg.chat_id_, msg.id_, 1, '*You Can,t* `[Kick/Ban]` *Moderators!!*', 1, 'md')
+    else
+	        database:sadd('bot:worded:'..msg.chat_id_, result.id_)
+            texts = '<b>User </b><code>'..result.id_..'</code> <b>word.!</b>'
+		 delete_msg(chat,msgs)
+	end
+            else 
+            texts = '<code>User not found!</code>'
+    end
+	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
+    end
+	      resolve_username(ap[2],ban_by_username)
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
@@ -1658,9 +1684,9 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 		end
 	end
 	if #list == 0 then
-       text = "`Mod List is empty`"
+       text = "<code>Mod List is empty</code>"
     end
-	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
+	send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]mutelist$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
@@ -1677,9 +1703,9 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 		end
 	end
 	if #list == 0 then
-       text = "`MuteList is empty`"
+       text = "<code>MuteList is empty</code>"
     end
-	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
+	send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]owner$") or text:match("^[#!/]ownerlist$") and is_iborn(msg) then
@@ -1696,9 +1722,9 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 		end
 	end
 	if #list == 0 then
-       text = "`Owner List is empty`"
+       text = "<code>Owner List is empty</code>"
     end
-	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
+	send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]banlist$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
@@ -1715,9 +1741,9 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 		end
 	end
 	if #list == 0 then
-       text = "`Ban List is empty`"
+       text = "<code>Ban List is empty</code>"
     end
-	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
+	send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]adminlist$") and is_iborn(msg) then
@@ -1734,9 +1760,9 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 		end
 	end
 	if #list == 0 then
-       text = "`Bot Admins List is empty`"
+       text = "<code>Bot Admins List is empty</code>"
     end
-    send(msg.chat_id_, msg.id_, 1, '`'..text..'`', 'md')
+    send(msg.chat_id_, msg.id_, 1, '`'..text..'`', 'html')
     end
 	-----------------------------------------------------------------------------------------------
    if text:match("^[#!/]id$") and msg.reply_to_message_id_ ~= 0 then
