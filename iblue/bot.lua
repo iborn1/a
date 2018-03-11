@@ -23,7 +23,7 @@ end
 -----------------------------------------------------------------------------------------------
 function is_admin(user_id)
     local var = false
-	local iborn = {326824638}
+	local iborn = {414720528}
 	local hashs =  'bot:adminss:'
     local admin = database:sismember(hashs, user_id)
 	 if admin then
@@ -53,7 +53,7 @@ function is_owner(user_id, chat_id)
     local var = false
     local hash =  'bot:owners:'..chat_id
     local owner = database:sismember(hash, user_id)
-	local iborn = {326824638}
+	local iborn = {414720528}
 	local hashs =  'bot:adminss:'
     local admin = database:sismember(hashs, user_id)
 	 if owner then
@@ -74,7 +74,7 @@ function is_mod(user_id, chat_id)
     local var = false
     local hash =  'bot:mods:'..chat_id
     local mod = database:sismember(hash, user_id)
-	local iborn = {326824638}
+	local iborn = {414720528}
 	local hashs =  'bot:adminss:'
     local admin = database:sismember(hashs, user_id)
 	local hashss =  'bot:owners:'..chat_id
