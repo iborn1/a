@@ -10,7 +10,7 @@ chats = {}
   -----------------------------------------------------------------------------------------------
 function is_iborn(msg)
   local var = false
-  local iborn = {326824638}
+  local iborn = {414720528}
   for k,v in pairs(iborn) do
     if msg.sender_user_id_ == v then
       var = true
@@ -23,7 +23,7 @@ end
 -----------------------------------------------------------------------------------------------
 function is_admin(user_id)
     local var = false
-	local iborn = {326824638}
+	local iborn = {414720528}
 	local hashs =  'bot:adminss:'
     local admin = database:sismember(hashs, user_id)
 	 if admin then
@@ -53,7 +53,7 @@ function is_owner(user_id, chat_id)
     local var = false
     local hash =  'bot:owners:'..chat_id
     local owner = database:sismember(hash, user_id)
-	local iborn = {326824638}
+	local iborn = {414720528}
 	local hashs =  'bot:adminss:'
     local admin = database:sismember(hashs, user_id)
 	 if owner then
@@ -74,7 +74,7 @@ function is_mod(user_id, chat_id)
     local var = false
     local hash =  'bot:mods:'..chat_id
     local mod = database:sismember(hash, user_id)
-	local iborn = {326824638}
+	local iborn = {414720528}
 	local hashs =  'bot:adminss:'
     local admin = database:sismember(hashs, user_id)
 	local hashss =  'bot:owners:'..chat_id
@@ -1242,7 +1242,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
         delete_msg(chat,msgs)
 	end
    end
-   if database:get("bot:group:link"..msg.chat_id_) == 'Waiting For Link!\nPls Send Group Link.\n\nJoin My Channel > @extreme_Ch' and is_mod(msg.sender_user_id_, msg.chat_id_) then
+   if database:get("bot:group:link"..msg.chat_id_) == 'Waiting For Link!\nPls Send Group Link.' and is_mod(msg.sender_user_id_, msg.chat_id_) then
       if text:match("(https://telegram.me/joinchat/%S+)") then
 	  local glink = text:match("(https://telegram.me/joinchat/%S+)")
       local hash = "bot:group:link"..msg.chat_id_
