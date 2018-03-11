@@ -1378,7 +1378,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	end
     end
 	-----------------------------------------------------------------------------------------------
-	--[[if text:match("^[#!/]delall$") and is_mod(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
+	if text:match("^[#!/]delall$") and is_mod(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function delall_by_reply(extra, result, success)
 	if is_mod(result.sender_user_id_, result.chat_id_) then
          send(msg.chat_id_, msg.id_, 1, '*You Can,t Delete Msgs from Moderators!!*', 1, 'md')
@@ -1394,7 +1394,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 		local ass = {string.match(text, "^[#/!](delall) (%d+)$")} 
 	 		     del_all_msgs(msg.chat_id_, ass[2])
          send(msg.chat_id_, msg.id_, 1, 'done', 1, 'md')
-    end]]
+    end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]unban$") and is_mod(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function unban_by_reply(extra, result, success)
