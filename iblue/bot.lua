@@ -1254,7 +1254,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
   else
     ------------------------------------ With Pattern -------------------------------------------
 	if text:match("^[#!/]ping$") then
-	   send(msg.chat_id_, msg.id_, 1, '*Bot Running*\n*Bot infromation:*\n\n*ID* > `259460597`\n*Name* > `Nano Speed bot`\n*Username* > `NanoSpeedbot`\n*Number* > `639080100068`', 1, 'md')
+	   send(msg.chat_id_, msg.id_, 1, '*Bot Running*\n*Bot infromation:*\n\n*ID* > `259460597`\n*Name* > `Nano Speed`\n*Username* > `NanoSpeed`\n*Number* > `639080100068`', 1, 'md')
 	end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[!/#]leave$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
@@ -2430,7 +2430,7 @@ local function gpro(extra, result, success)
     end
 	-----------------------------------------------------------------------------------------------
   	if text:match("^[#!/]share$") then
-       sendContact(msg.chat_id_, msg.id_, 0, 1, nil, 639080100068, '#iBoue', 'Bot', 196913743)
+       sendContact(msg.chat_id_, msg.id_, 0, 1, nil, 639080100068, 'NanoSpeed', '', 196913743)
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]rename (.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
