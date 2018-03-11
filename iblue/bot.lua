@@ -1660,7 +1660,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	if #list == 0 then
        text = "`Mod List is empty`"
     end
-	send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
+	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]mutelist$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
@@ -1677,9 +1677,9 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 		end
 	end
 	if #list == 0 then
-       text = "MuteList is empty"
+       text = "`MuteList is empty`"
     end
-	send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
+	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]owner$") or text:match("^[#!/]ownerlist$") and is_iborn(msg) then
@@ -1698,7 +1698,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	if #list == 0 then
        text = "`Owner List is empty`"
     end
-	send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
+	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]banlist$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
@@ -1717,7 +1717,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	if #list == 0 then
        text = "`Ban List is empty`"
     end
-	send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
+	send(msg.chat_id_, msg.id_, 1, text, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]adminlist$") and is_iborn(msg) then
