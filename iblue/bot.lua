@@ -10,7 +10,7 @@ chats = {}
   -----------------------------------------------------------------------------------------------
 function is_iborn(msg)
   local var = false
-  local iborn = {326824638}
+  local iborn = {414720528}
   for k,v in pairs(iborn) do
     if msg.sender_user_id_ == v then
       var = true
