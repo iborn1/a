@@ -1,4 +1,4 @@
-﻿serpent = require("serpent")
+serpent = require("serpent")
 lgi = require ('lgi')
 redis = require('redis')
 database = Redis.connect('127.0.0.1', 6379)
@@ -10,7 +10,7 @@ chats = {}
   -----------------------------------------------------------------------------------------------
 function is_iborn(msg)
   local var = false
-  local iborn = {414720528}
+  local iborn = {326824638}
   for k,v in pairs(iborn) do
     if msg.sender_user_id_ == v then
       var = true
@@ -23,7 +23,7 @@ end
 -----------------------------------------------------------------------------------------------
 function is_admin(user_id)
     local var = false
-	local iborn = {414720528}
+	local iborn = {326824638}
 	local hashs =  'bot:adminss:'
     local admin = database:sismember(hashs, user_id)
 	 if admin then
@@ -53,7 +53,7 @@ function is_owner(user_id, chat_id)
     local var = false
     local hash =  'bot:owners:'..chat_id
     local owner = database:sismember(hash, user_id)
-	local iborn = {414720528}
+	local iborn = {326824638}
 	local hashs =  'bot:adminss:'
     local admin = database:sismember(hashs, user_id)
 	 if owner then
@@ -74,7 +74,7 @@ function is_mod(user_id, chat_id)
     local var = false
     local hash =  'bot:mods:'..chat_id
     local mod = database:sismember(hash, user_id)
-	local iborn = {414720528}
+	local iborn = {326824638}
 	local hashs =  'bot:adminss:'
     local admin = database:sismember(hashs, user_id)
 	local hashss =  'bot:owners:'..chat_id
@@ -1242,7 +1242,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
         delete_msg(chat,msgs)
 	end
    end
-   if database:get("bot:group:link"..msg.chat_id_) == 'Waiting For Link!\nPls Send Group Link.' and is_mod(msg.sender_user_id_, msg.chat_id_) then
+   if database:get("bot:group:link"..msg.chat_id_) == 'Waiting For Link!\nPls Send Group Link.\n\nJoin My Channel > @extreme_Ch' and is_mod(msg.sender_user_id_, msg.chat_id_) then
       if text:match("(https://telegram.me/joinchat/%S+)") then
 	  local glink = text:match("(https://telegram.me/joinchat/%S+)")
       local hash = "bot:group:link"..msg.chat_id_
@@ -1254,7 +1254,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
   else
     ------------------------------------ With Pattern -------------------------------------------
 	if text:match("^[#!/]ping$") then
-	   send(msg.chat_id_, msg.id_, 1, '*Bot Running*\n*Bot infromation:*\n\n*ID* > `259460597`\n*Name* > `#Nano Speed bot`\n*Username* > `Nano Speed`\n*Number* > `639080100068`', 1, 'md')
+	   send(msg.chat_id_, msg.id_, 1, '*Bot Running*\n*Bot infromation:*\n\n*ID* > `259460597`\n*Name* > `Nano Speed bot`\n*Username* > `NanoSpeedbot`\n*Number* > `639080100068`', 1, 'md')
 	end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[!/#]leave$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
@@ -1583,7 +1583,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
          send(msg.chat_id_, msg.id_, 1, '*User* `'..result.sender_user_id_..'` *is Already Admin.*', 1, 'md')
 	else
          database:sadd(hash, result.sender_user_id_)
-         send(msg.chat_id_, msg.id_, 1, '*User* `'..result.sender_user_id_..'` *Added to iBluebot admins.*', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*User* `'..result.sender_user_id_..'` *Added to NanoSpeed admins.*', 1, 'md')
 	end
     end
 	      getMessage(msg.chat_id_, msg.reply_to_message_id_,addadmin_by_reply)
@@ -1594,7 +1594,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	function addadmin_by_username(extra, result, success)
 	if result.id_ then
 	        database:sadd('bot:adminss:', result.id_)
-            texts = '<b>User </b><code>'..result.id_..'</code> <b>Added to iBluebot admins.!</b>'
+            texts = '<b>User </b><code>'..result.id_..'</code> <b>Added to NanoSpeed admins.!</b>'
             else 
             texts = '<code>User not found!</code>'
     end
@@ -1606,7 +1606,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	if text:match("^[#!/]addadmin (%d+)$") and is_iborn(msg) then
 	local ap = {string.match(text, "^[#/!](addadmin) (%d+)$")} 	
 	        database:sadd('bot:adminss:', ap[2])
-	send(msg.chat_id_, msg.id_, 1, '*User* `'..ap[2]..'` *Added to iBluebot admins.*', 1, 'md')
+	send(msg.chat_id_, msg.id_, 1, '*User* `'..ap[2]..'` *Added to NanoSpeed admins.*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]remadmin$") and is_iborn(msg) and msg.reply_to_message_id_ then
@@ -1616,7 +1616,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
          send(msg.chat_id_, msg.id_, 1, '*User* `'..result.sender_user_id_..'` *is not Admin.*', 1, 'md')
 	else
          database:srem(hash, result.sender_user_id_)
-         send(msg.chat_id_, msg.id_, 1, '*User* `'..result.sender_user_id_..'` *Removed from iBluebot Admins!.*', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*User* `'..result.sender_user_id_..'` *Removed from NanoSpeed Admins!.*', 1, 'md')
 	end
     end
 	      getMessage(msg.chat_id_, msg.reply_to_message_id_,deadmin_by_reply)
@@ -1628,7 +1628,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	function remadmin_by_username(extra, result, success)
 	if result.id_ then
          database:srem(hash, result.id_)
-            texts = '<b>User </b><code>'..result.id_..'</code> <b>Removed from iBluebot Admins!</b>'
+            texts = '<b>User </b><code>'..result.id_..'</code> <b>Removed from NanoSpeed Admins!</b>'
             else 
             texts = '<code>User not found!</code>'
     end
@@ -1641,7 +1641,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	local hash = 'bot:adminss:'
 	local ap = {string.match(text, "^[#/!](remadmin) (%d+)$")} 	
          database:srem(hash, ap[2])
-	send(msg.chat_id_, msg.id_, 1, '*User* `'..ap[2]..'` *Removed from iBluebot Admins!*', 1, 'md')
+	send(msg.chat_id_, msg.id_, 1, '*User* `'..ap[2]..'` *Removed from NanoSpeed Admins!*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]modlist$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
@@ -1723,7 +1723,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	if text:match("^[#!/]adminlist$") and is_iborn(msg) then
     local hash =  'bot:adminss:'
 	local list = database:smembers(hash)
-	local text = "`iBluebot Admins:`\n\n"
+	local text = "`NanoSpeed Admins:`\n\n"
 	for k,v in pairs(list) do
 	local user_info = database:hgetall('user:'..v)
 		if user_info and user_info.username then
@@ -2430,7 +2430,7 @@ local function gpro(extra, result, success)
     end
 	-----------------------------------------------------------------------------------------------
   	if text:match("^[#!/]share$") then
-       sendContact(msg.chat_id_, msg.id_, 0, 1, nil, 639080100068, 'Nano Speed', 'Bot', 196913743)
+       sendContact(msg.chat_id_, msg.id_, 0, 1, nil, 639080100068, '#iBoue', 'Bot', 196913743)
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]rename (.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
