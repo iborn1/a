@@ -1335,8 +1335,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	if result.id_ then
 	        database:sadd('bot:word:'..word, result.id_)
             texts = '<b>Word </b><code>'..word..'</code> <b>Added To Block List!</b>'
-		 delete_msg(msg.chat_id_, result.id_)
-	end
+			delete_msg(msg.chat_id_, result.id_)
 	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
     end
 	-----------------------------------------------------------------------------------------------
