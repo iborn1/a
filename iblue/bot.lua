@@ -2480,7 +2480,7 @@ else
         for i= id - 10000 , id do 
         delete_msg(msg.chat_id_,{[0] = i})
         end
-			send(msg.chat_id_, msg.id_, 1, '*Last Msgs Has Been Removed.*', 1, 'md')
+			send(msg.chat_id_, msg.id_, 1, '*All Message Deleted.*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
    if text:match("^[#!/]me$") then
