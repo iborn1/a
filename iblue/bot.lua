@@ -1270,7 +1270,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	if text:match("^[#!/]wordlist$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
     local hash =  'bot:word:'..msg.chat_id_
 	local list = database:smembers(hash)
-	local text = "<b>Mod List:</b>\n\n"
+	local text = "<b>word List:</b>\n\n"
 	for k,v in pairs(list) do
 	local user_info = database:hgetall('user:'..v)
 		if user_info and user_info.username then
@@ -1281,9 +1281,16 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 		end
 	end
 	if #list == 0 then
-       text = "<code>Mod List is empty</code>"
+       text = "<code>word List is empty</code>"
     end
 	send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
+    end
+	-------------------------------------------------------------------------------------------------------
+		if text:match("^[#!/]remword (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+	local hash = 'bot:word:'..msg.chat_id_
+	local ap = {string.match(text, "^[#/!](remword) (.*)$")} 	
+         database:srem(hash, ap[2])
+	send(msg.chat_id_, msg.id_, 1, '*word* `'..ap[2]..'` *Rem.*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
