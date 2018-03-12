@@ -1260,11 +1260,25 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	if text:match("^[!/#]leave$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
 	     chat_leave(msg.chat_id_, 259460597)
     end
-	-----------------------------------------------------------------------------------------------
+	---------------------------------------- words    -------------------------------------------------------
 	if text:match("^[#!/]addword (.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
 	local ap = {string.match(text, "^[#/!](addword) (.*)$")} 	
 	        database:sadd('bot:word:'..msg.chat_id_, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*word* `'..ap[2]..'` *added*', 1, 'md')
+    end
+	---------------------------------------------------------------------------------------------------------
+	if text:match("^[#!/]wordlist$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+    local hash =  'bot:word:'..msg.chat_id_
+	local list = database:word(hash)
+	local text = "<b>word List:</b>\n\n"
+	for k,v in pairs(list) do
+			text = text..k.." - "..v.."\n"
+		end
+	end
+	if #list == 0 then
+       text = "<code>Word List is empty</code>"
+    end
+	send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
     end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
