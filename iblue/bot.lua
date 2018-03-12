@@ -106,6 +106,16 @@ function is_banned(user_id, chat_id)
     return var
 end
 -----------------------------------------------------------------------------------------------
+function is_word(user_id, chat_id)
+    local var = false
+	local hash = 'bot:word:'..MessageText
+    local word = database:sismember(hash, MessageText)
+	 if word then
+	    var = true
+	 end
+    return var
+end
+-----------------------------------------------------------------------------------------------
 function is_muted(user_id, chat_id)
     local var = false
 	local hash = 'bot:muted:'..chat_id
@@ -618,6 +628,13 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
 		  return 
 end
 if is_muted(msg.sender_user_id_, msg.chat_id_) then
+        local id = msg.id_
+        local msgs = {[0] = id}
+        local chat = msg.chat_id_
+          delete_msg(chat,msgs)
+		  return 
+end
+if is_word(msg.sender_user_id_, msg.chat_id_) then
         local id = msg.id_
         local msgs = {[0] = id}
         local chat = msg.chat_id_
@@ -1263,13 +1280,13 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	---------------------------------------- words    -------------------------------------------------------
 	if text:match("^[#!/]addword (.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
 	local ap = {string.match(text, "^[#/!](addword) (.*)$")} 	
-	        database:sword('bot:word:'..msg.chat_id_, ap[2])
+	        database:sismember('bot:word:'..msg.chat_id_, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*word* `'..ap[2]..'` *added*', 1, 'md')
     end
 	---------------------------------------------------------------------------------------------------------
 	if text:match("^[#!/]wordlist$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
     local hash =  'bot:word:'..msg.chat_id_
-	local list = database:sword(hash)
+	local list = database:sismember(hash)
 	local text = "<b>word List:</b>\n\n"
 	for k,v in pairs(list) do
 	end
