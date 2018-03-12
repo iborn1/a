@@ -1802,7 +1802,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	local ap = {string.match(text, "^[#/!](id) @(.*)$")} 
 	function id_by_username(extra, result, success)
 	if result.id_ then
-	if is_iborn(result) then
+	if is_iborn(msg) then
 	  t = 'Developer'
       elseif is_admin(result.id_) then
 	  t = 'Global Admin'
