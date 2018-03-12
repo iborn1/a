@@ -1338,6 +1338,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 			delete_msg(msg.chat_id_, result.id_)
 	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
     end
+	end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]ban$") and is_mod(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function ban_by_reply(extra, result, success)
