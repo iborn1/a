@@ -106,6 +106,16 @@ function is_banned(user_id, chat_id)
     return var
 end
 -----------------------------------------------------------------------------------------------
+function is_word(user_id, chat_id)
+    local var = false
+	local hash = 'bot:word:'..chat_id
+    local banned = database:sismember(hash, user_id)
+	 if banned then
+	    var = true
+	 end
+    return var
+end
+-----------------------------------------------------------------------------------------------
 function is_muted(user_id, chat_id)
     local var = false
 	local hash = 'bot:muted:'..chat_id
@@ -615,6 +625,13 @@ if is_banned(msg.sender_user_id_, msg.chat_id_) then
         local msgs = {[0] = id}
         local chat = msg.chat_id_
 		  chat_kick(msg.chat_id_, msg.sender_user_id_)
+		  return 
+end
+if is_word(msg.sender_user_id_, msg.chat_id_) then
+        local id = msg.id_
+        local msgs = {[0] = id}
+        local chat = msg.chat_id_
+		  delete_msg(chat, MessageText)
 		  return 
 end
 if is_muted(msg.sender_user_id_, msg.chat_id_) then
@@ -2233,6 +2250,10 @@ local function gpro(extra, result, success)
 	   if txt[2] == 'modlist' then
 	      database:del('bot:mods:'..msg.chat_id_)
           send(msg.chat_id_, msg.id_, 1, '`Modlist` *has been Cleaned*', 1, 'md')
+       end
+	   if txt[2] == 'wordlist' then
+	      database:del('bot:word:'..msg.chat_id_)
+          send(msg.chat_id_, msg.id_, 1, '`WordList` *has been Cleaned*', 1, 'md')
        end
 	   if txt[2] == 'mutelist' then
 	      database:del('bot:muted:'..msg.chat_id_)
