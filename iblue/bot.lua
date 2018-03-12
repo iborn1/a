@@ -1263,13 +1263,13 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	---------------------------------------- words    -------------------------------------------------------
 	if text:match("^[#!/]addword (.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
 	local ap = {string.match(text, "^[#/!](addword) (.*)$")} 	
-	        database:sadd('bot:word:'..msg.chat_id_, ap[2])
+	        database:sword('bot:word:'..msg.chat_id_, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*word* `'..ap[2]..'` *added*', 1, 'md')
     end
 	---------------------------------------------------------------------------------------------------------
 	if text:match("^[#!/]wordlist$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
     local hash =  'bot:word:'..msg.chat_id_
-	local list = database:sadd(hash)
+	local list = database:sword(hash)
 	local text = "<b>word List:</b>\n\n"
 	for k,v in pairs(list) do
 	end
