@@ -624,13 +624,6 @@ if is_muted(msg.sender_user_id_, msg.chat_id_) then
           delete_msg(chat,msgs)
 		  return 
 end
-if is_word(msg.sender_user_id_, msg.chat_id_) then
-        local id = msg.id_
-        local msgs = {[0] = id}
-        local chat = msg.chat_id_
-          delete_msg(chat,msgs)
-		  return 
-end
 if is_gbanned(msg.sender_user_id_) then
         local id = msg.id_
         local msgs = {[0] = id}
