@@ -1261,6 +1261,12 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	     chat_leave(msg.chat_id_, 259460597)
     end
 	-----------------------------------------------------------------------------------------------
+	if text:match("^[#!/]addword (.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
+	local ap = {string.match(text, "^[#/!](addword) (.*)$")} 	
+	        database:sadd('bot:word:'..msg.chat_id_, ap[2])
+	send(msg.chat_id_, msg.id_, 1, '*word* `'..ap[2]..'` *added*', 1, 'md')
+    end
+	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]promote$") and is_owner(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function promote_by_reply(extra, result, success)
 	local hash = 'bot:mods:'..msg.chat_id_
