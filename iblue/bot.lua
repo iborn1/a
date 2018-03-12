@@ -1269,7 +1269,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	---------------------------------------------------------------------------------------------------------
 	if text:match("^[#!/]wordlist$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
     local hash =  'bot:word:'..msg.chat_id_
-	local list = database:word(hash)
+	local list = database:sadd(hash)
 	local text = "<b>word List:</b>\n\n"
 	for k,v in pairs(list) do
 	local user_info = database:hgetall('user:'..v)
