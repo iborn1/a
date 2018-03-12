@@ -1377,21 +1377,68 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
          database:srem(hash, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*User* `'..ap[2]..'` *Demoted.*', 1, 'md')
     end
-	-----------------------------------------------------------------------------------------------
-
-	-----------------------------------------------------------------------------------------------
-	if text:match("^[#!/]ban$") and is_mod(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
+	-------------------------------------------- Global Ban ---------------------------------------------------
+if text:match("^[#!/]ban all$") and is_admin(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
 	function ban_by_reply(extra, result, success)
-	local hash = 'bot:banned:'..msg.chat_id_
-	if is_mod(result.sender_user_id_, result.chat_id_) then
-         send(msg.chat_id_, msg.id_, 1, '*You Can,t* `[Kick/Ban]` *Moderators!!*', 1, 'md')
+	local hash = 'bot:gbanned:'..msg.chat_id_
+	if is_admin(result.sender_user_id_, result.chat_id_) then
+         send(msg.chat_id_, msg.id_, 1, '*You Can,t* `[Kick/Ban/Ban all]` *Admins!!*', 1, 'md')
     else
     if database:sismember(hash, result.sender_user_id_) then
-         send(msg.chat_id_, msg.id_, 1, '*User* `'..result.sender_user_id_..'` *is Already Banned.*', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*User* `'..result.sender_user_id_..'` *is Already Global Banned.*', 1, 'md')
 		 chat_kick(result.chat_id_, result.sender_user_id_)
 	else
          database:sadd(hash, result.sender_user_id_)
-         send(msg.chat_id_, msg.id_, 1, '*User* `'..result.sender_user_id_..'` *Banned.*', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*User* `'..result.sender_user_id_..'` *Global Banned.*', 1, 'md')
+		 chat_kick(result.chat_id_, result.sender_user_id_)
+	end
+    end
+	end
+	      getMessage(msg.chat_id_, msg.reply_to_message_id_,ban_by_reply)
+    end
+	-----------------------------------------------------------------------------------------------
+	if text:match("^[#!/]ban all @(.*)$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
+	local ap = {string.match(text, "^[#/!](ban all) @(.*)$")} 
+	function ban_by_username(extra, result, success)
+	if result.id_ then
+	if is_admin(result.id_, msg.chat_id_) then
+         send(msg.chat_id_, msg.id_, 1, '*You Can,t* `[Kick/Ban/Ban all]` *admin!!*', 1, 'md')
+    else
+	        database:sadd('bot:gbanned:'..msg.chat_id_, result.id_)
+            texts = '<b>User </b><code>'..result.id_..'</code> <b> Global Banned.!</b>'
+		 chat_kick(msg.chat_id_, result.id_)
+	end
+            else 
+            texts = '<code>User not found!</code>'
+    end
+	         send(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
+    end
+	      resolve_username(ap[2],ban_by_username)
+    end
+	-----------------------------------------------------------------------------------------------
+	if text:match("^[#!/]ban all (%d+)$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
+	local ap = {string.match(text, "^[#/!](ban) (%d+)$")}
+	if is_admin(ap[2], msg.chat_id_) then
+         send(msg.chat_id_, msg.id_, 1, '*You Can,t [Kick/Ban/Ban all] admins!!*', 1, 'md')
+    else
+	        database:sadd('bot:gbanned:'..msg.chat_id_, ap[2])
+		 chat_kick(msg.chat_id_, ap[2])
+	send(msg.chat_id_, msg.id_, 1, '*User* `'..ap[2]..'` *Global Banned.*', 1, 'md')
+	end
+    end
+	-----------------------------------------------------------------------------------------------
+	if text:match("^[#!/]ban all$") and is_admin(msg.sender_user_id_, msg.chat_id_) and msg.reply_to_message_id_ then
+	function ban_by_reply(extra, result, success)
+	local hash = 'bot:gbanned:'..msg.chat_id_
+	if is_admin(result.sender_user_id_, result.chat_id_) then
+         send(msg.chat_id_, msg.id_, 1, '*You Can,t* `[Kick/Ban/Ban all]` *admins!!*', 1, 'md')
+    else
+    if database:sismember(hash, result.sender_user_id_) then
+         send(msg.chat_id_, msg.id_, 1, '*User* `'..result.sender_user_id_..'` *is Already Global Banned.*', 1, 'md')
+		 chat_kick(result.chat_id_, result.sender_user_id_)
+	else
+         database:sadd(hash, result.sender_user_id_)
+         send(msg.chat_id_, msg.id_, 1, '*User* `'..result.sender_user_id_..'` *Global Banned.*', 1, 'md')
 		 chat_kick(result.chat_id_, result.sender_user_id_)
 	end
     end
@@ -1404,7 +1451,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	function ban_by_username(extra, result, success)
 	if result.id_ then
 	if is_mod(result.id_, msg.chat_id_) then
-         send(msg.chat_id_, msg.id_, 1, '*You Can,t* `[Kick/Ban]` *Moderators!!*', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*You Can,t* `[Kick/Ban/Ban all]` *Moderators!!*', 1, 'md')
     else
 	        database:sadd('bot:banned:'..msg.chat_id_, result.id_)
             texts = '<b>User </b><code>'..result.id_..'</code> <b>Banned.!</b>'
@@ -1421,7 +1468,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	if text:match("^[#!/]ban (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local ap = {string.match(text, "^[#/!](ban) (%d+)$")}
 	if is_mod(ap[2], msg.chat_id_) then
-         send(msg.chat_id_, msg.id_, 1, '*You Can,t [Kick/Ban] Moderators!!*', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*You Can,t [Kick/Ban/Ban all] Moderators!!*', 1, 'md')
     else
 	        database:sadd('bot:banned:'..msg.chat_id_, ap[2])
 		 chat_kick(msg.chat_id_, ap[2])
@@ -1802,7 +1849,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	local ap = {string.match(text, "^[#/!](id) @(.*)$")} 
 	function id_by_username(extra, result, success)
 	if result.id_ then
-	if is_iborn(msg) then
+	if is_iborn(result) then
 	  t = 'Developer'
       elseif is_admin(result.id_) then
 	  t = 'Global Admin'
