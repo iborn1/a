@@ -106,16 +106,6 @@ function is_banned(user_id, chat_id)
     return var
 end
 -----------------------------------------------------------------------------------------------
-function is_word(user_id, chat_id)
-    local var = false
-	local hash = 'bot:word:'..MessageText
-    local word = database:sismember(hash, MessageText)
-	 if word then
-	    var = true
-	 end
-    return var
-end
------------------------------------------------------------------------------------------------
 function is_muted(user_id, chat_id)
     local var = false
 	local hash = 'bot:muted:'..chat_id
