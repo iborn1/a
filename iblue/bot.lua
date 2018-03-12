@@ -1272,11 +1272,16 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	local list = database:word(hash)
 	local text = "<b>word List:</b>\n\n"
 	for k,v in pairs(list) do
+	local user_info = database:hgetall('user:'..v)
+		if user_info and user_info.username then
+			local username = user_info.username
+			text = text..k.." - @"..username.." ["..v.."]\n"
+		else
 			text = text..k.." - "..v.."\n"
 		end
 	end
 	if #list == 0 then
-       text = "<code>Word List is empty</code>"
+       text = "<code>Mod List is empty</code>"
     end
 	send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
     end
