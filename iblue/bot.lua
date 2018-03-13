@@ -1280,7 +1280,6 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	--------------------------------------- words --------------------------------------------------------
 		if text:match("^[#!/]addword (.*)$") or text:match("^[Aa]ddword (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local ap = {string.match(text, "^[#/!](addword) (.*)$")}
-	local ap = {string.match(text, "^[Aa](ddword) (.*)$")}
 	        database:sadd('bot:word:'..msg.chat_id_, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*word* `'..ap[2]..'` *added*', 1, 'md')
     end
@@ -1307,7 +1306,6 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 		if text:match("^[#!/]remword (.*)$") or text:match("^[Rr]emword (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local hash = 'bot:word:'..msg.chat_id_
 	local ap = {string.match(text, "^[#/!](remword) (.*)$")}
-	local ap = {string.match(text, "^[Rr](emword) (.*)$")}
          database:srem(hash, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*word* `'..ap[2]..'` *Rem.*', 1, 'md')
     end
@@ -1327,7 +1325,6 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]promote @(.*)$") or text:match("^[Pp]romote @(.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
 	local ap = {string.match(text, "^[#/!](promote) @(.*)$")}
-	local ap = {string.match(text, "^[Pp](romote) @(.*)$")}
 	function promote_by_username(extra, result, success)
 	if result.id_ then
 	        database:sadd('bot:mods:'..msg.chat_id_, result.id_)
@@ -1342,7 +1339,6 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]promote (%d+)$") or text:match("^[Pp]romote (%d+)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
 	local ap = {string.match(text, "^[#/!](promote) (%d+)$")} 
-	local ap = {string.match(text, "^[Pp](romote) (%d+)$")}
 	        database:sadd('bot:mods:'..msg.chat_id_, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*User* `'..ap[2]..'` *promoted as moderator.*', 1, 'md')
     end
@@ -1363,7 +1359,6 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	if text:match("^[#!/]demote @(.*)$") or text:match("^[Dd]emote @(.*)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
 	local hash = 'bot:mods:'..msg.chat_id_
 	local ap = {string.match(text, "^[#/!](demote) @(.*)$")}
-	local ap = {string.match(text, "^[Dd](emote) @(.*)$")}
 	function demote_by_username(extra, result, success)
 	if result.id_ then
          database:srem(hash, result.id_)
@@ -1379,7 +1374,6 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	if text:match("^[#!/]demote (%d+)$") or text:match("^[Dd]emote (%d+)$") and is_owner(msg.sender_user_id_, msg.chat_id_) then
 	local hash = 'bot:mods:'..msg.chat_id_
 	local ap = {string.match(text, "^[#/!](demote) (%d+)$")}
-	local ap = {string.match(text, "^[Dd](emote) (%d+)$")}
          database:srem(hash, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*User* `'..ap[2]..'` *Demoted.*', 1, 'md')
     end
