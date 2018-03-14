@@ -1278,7 +1278,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
 	     chat_leave(msg.chat_id_, 259460597)
     end
 	--------------------------------------- words --------------------------------------------------------
-		if text:match("^[#!/]addword (.*)$") or text:match("^[Aa]ddword (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
+		if text:match("^[#!/]addword (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local ap = {string.match(text, "^[#/!](addword) (.*)$")}
 	        database:sadd('bot:word:'..msg.chat_id_, ap[2])
 	send(msg.chat_id_, msg.id_, 1, '*word* `'..ap[2]..'` *added*', 1, 'md')
@@ -2007,7 +2007,7 @@ local function gpro(extra, result, success)
          database:set('editmsg'..msg.chat_id_,'delmsg')
 	  end
 	  if lockpt[2] == "cmds" then
-         send(msg.chat_id_, msg.id_, 1, '*> Bot Commands Has Been Locked*\n`[Now All Members Can`t Use Normal Commands.]`', 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, '*> Bot Commands Has Been Locked*\n`[Now All Members Can not Use Normal Commands.]`', 1, 'md')
          database:set('bot:cmds'..msg.chat_id_,true)
       end
 	  if lockpt[2] == "bots" then
@@ -2019,7 +2019,7 @@ local function gpro(extra, result, success)
          database:del('anti-flood:'..msg.chat_id_)
 	  end
 	  if lockpt[2] == "pin" then
-         send(msg.chat_id_, msg.id_, 1, "*Now Members can't* `pin` *a msg*", 1, 'md')
+         send(msg.chat_id_, msg.id_, 1, "*Now Members can not* `pin` *a msg*", 1, 'md')
 	     database:set('bot:pin:mute'..msg.chat_id_,true)
       end
 	end
