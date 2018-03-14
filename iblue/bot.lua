@@ -1267,9 +1267,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
       end
    end
   if database:get('bot:cmds:mods'..msg.chat_id_) and not is_mod(msg.sender_user_id_, msg.chat_id_) then
-  return 
-  else database:get('bot:cmds:owner'..msg.chat_id_) and not is_owner(msg.sender_user_id_, msg.chat_id_) then
-  return 
+  return
   else
     ------------------------------------ With Pattern -------------------------------------------
 	if text:match("^[#!/]ping$") or text:match("^[Pp]ing$") then
