@@ -1799,6 +1799,25 @@ if text:match("^[#!/]ban all$") and is_admin(msg.sender_user_id_, msg.chat_id_) 
 	send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
     end
 	-----------------------------------------------------------------------------------------------
+		if text:match("^[#!/]gbanlist$") and is_admin(msg.sender_user_id_, msg.chat_id_) then
+    local hash =  'bot:gbanned:'..msg.chat_id_
+	local list = database:smembers(hash)
+	local text = "<b>Global Ban List:</b>\n\n"
+	for k,v in pairs(list) do
+	local user_info = database:hgetall('user:'..v)
+		if user_info and user_info.username then
+			local username = user_info.username
+			text = text..k.." - @"..username.." ["..v.."]\n"
+		else
+			text = text..k.." - "..v.."\n"
+		end
+	end
+	if #list == 0 then
+       text = "<code>Global Ban List is empty</code>"
+    end
+	send(msg.chat_id_, msg.id_, 1, text, 1, 'html')
+    end
+	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]banlist$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
     local hash =  'bot:banned:'..msg.chat_id_
 	local list = database:smembers(hash)
@@ -1837,7 +1856,7 @@ if text:match("^[#!/]ban all$") and is_admin(msg.sender_user_id_, msg.chat_id_) 
     send(msg.chat_id_, msg.id_, 1, '`'..text..'`', 'html')
     end
 	-----------------------------------------------------------------------------------------------
-   if text:match("^[#!/]id$") and msg.reply_to_message_id_ ~= 0 then
+   if text:match("^[#!/]id$") text:match("^[Ii]d$") and msg.reply_to_message_id_ ~= 0 then
       function id_by_reply(extra, result, success)
 	  local user_msgs = database:get('user:msgs'..result.chat_id_..':'..result.sender_user_id_)
         send(msg.chat_id_, msg.id_, 1, "*> User ID:* `"..result.sender_user_id_.."`\n*> Number of Msgs:* `"..user_msgs.."`", 1, 'md')
@@ -1888,7 +1907,7 @@ if text:match("^[#!/]ban all$") and is_admin(msg.sender_user_id_, msg.chat_id_) 
    getMessage(msg.chat_id_, msg.reply_to_message_id_,inv_reply)
     end
 	-----------------------------------------------------------------------------------------------
-    if text:match("^[#!/]id$") and msg.reply_to_message_id_ == 0  then
+    if text:match("^[#!/]id$") text:match("^[Ii]d$") and msg.reply_to_message_id_ == 0  then
 local function getpro(extra, result, success)
 local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_id_)
    if result.photos_[0] then
