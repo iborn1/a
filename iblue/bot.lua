@@ -1932,8 +1932,7 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
 > Your Name: '..result.first_name_..'
 > Id: '..msg.sender_user_id_..'
 > Username: '..user_info.username..'
-> Number of your Msgs: '..user_msgs..'
-"
+> Number of your Msgs: '..user_msgs"
          send(msg.chat_id_, msg.id_, 1, TXT, 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
