@@ -2022,7 +2022,6 @@ local function gpro(extra, result, success)
          send(msg.chat_id_, msg.id_, 1, "*Now Members can't* `pin` *a msg*", 1, 'md')
 	     database:set('bot:pin:mute'..msg.chat_id_,true)
       end
-	  else send(msg.chat_id_, msg.id_, 1, "*Not found*", 1, 'md')
 	end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]setflood (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
