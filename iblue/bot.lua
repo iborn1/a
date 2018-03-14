@@ -1266,7 +1266,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
                database:set(hash,glink)
       end
    end
-  if database:get('bot:cmds:mods'..msg.chat_id_) and not is_mod(msg.sender_user_id_, msg.chat_id_) then
+  if database:get('bot:cmds'..msg.chat_id_) and not is_mod(msg.sender_user_id_, msg.chat_id_) then
   return 
   else
     ------------------------------------ With Pattern -------------------------------------------
@@ -2006,6 +2006,10 @@ local function gpro(extra, result, success)
          send(msg.chat_id_, msg.id_, 1, '*Done*\n*Msg* `Edit` *locked for normal members.*', 1, 'md')
          database:set('editmsg'..msg.chat_id_,'delmsg')
 	  end
+	  if lockpt[2] == "cmds" then
+         send(msg.chat_id_, msg.id_, 1, '*> Bot Commands Has Been Locked*\n`[Now All Members Can`t Use Normal Commands.]`', 1, 'md')
+         database:set('bot:cmds'..msg.chat_id_,true)
+      end
 	  if lockpt[2] == "bots" then
          send(msg.chat_id_, msg.id_, 1, '>` Bots` *Has been* *Locked*', 1, 'md')
          database:set('bot:bots:mute'..msg.chat_id_,true)
@@ -2019,13 +2023,6 @@ local function gpro(extra, result, success)
 	     database:set('bot:pin:mute'..msg.chat_id_,true)
       end
 	end
-	-----------------------------------------------------------------------------------------------
-		if text:match("^[#!/]lock (.*)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
-			local lockpt = {string.match(text, "^[#/!](lock) (.*)$")}
-			if lockpt[2] == "cmd mods" then
-			send(msg.chat_id_, msg.id_, 1, '*> Bot Commands Has Been Locked*\n`[Now All Members Can`t Use Normal Commands.]`', 1, 'md')
-			database:set('bot:cmds:mods'..msg.chat_id_,true)
-      end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]setflood (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
 	local floodmax = {string.match(text, "^[#/!](setflood) (%d+)$")} 
@@ -2110,6 +2107,10 @@ local function gpro(extra, result, success)
       if unlockpt[2] == "edit" then
          send(msg.chat_id_, msg.id_, 1, '*Done*\n*Msg `Edit` *has been unlocked.*', 1, 'md')
          database:del('editmsg'..msg.chat_id_)
+      end
+	  if unlockpt[2] == "cmds" then
+         send(msg.chat_id_, msg.id_, 1, '*> Bot Commands Has Been Unlocked*\n`[Now All Members Can Use Normal Commands.]`', 1, 'md')
+         database:del('bot:cmds'..msg.chat_id_)
       end
 	  if unlockpt[2] == "bots" then
          send(msg.chat_id_, msg.id_, 1, '> `Bots` *Has been* *Unlocked*', 1, 'md')
