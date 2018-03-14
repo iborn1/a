@@ -1924,18 +1924,6 @@ local user_msgs = database:get('user:msgs'..msg.chat_id_..':'..msg.sender_user_i
   }, getpro, nil)
 	end
 	-----------------------------------------------------------------------------------------------
-		if text:match("^[#!/]info$") then
-		local TXT = "
-> Supergroup ID: '..msg.chat_id_..'
-> Supergroup Name: '..chat.title_..'
-
-> Your Name: '..result.first_name_..'
-> Id: '..msg.sender_user_id_..'
-> Username: '..user_info.username..'
-> Number of your Msgs: '..user_msgs"
-         send(msg.chat_id_, msg.id_, 1, TXT, 1, 'md')
-    end
-	-----------------------------------------------------------------------------------------------
     if text:match("^[#!/]getpro (%d+)$") and msg.reply_to_message_id_ == 0  then
 		local pronumb = {string.match(text, "^[#/!](getpro) (%d+)$")} 
 local function gpro(extra, result, success)
