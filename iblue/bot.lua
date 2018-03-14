@@ -1267,7 +1267,7 @@ if database:get('bot:forward:mute'..msg.chat_id_) and not is_mod(msg.sender_user
       end
    end
   if database:get('bot:cmds:mods'..msg.chat_id_) and not is_mod(msg.sender_user_id_, msg.chat_id_) then
-  return
+  return 
   else
     ------------------------------------ With Pattern -------------------------------------------
 	if text:match("^[#!/]ping$") or text:match("^[Pp]ing$") then
@@ -2025,10 +2025,6 @@ local function gpro(extra, result, success)
 			if lockpt[2] == "cmd mods" then
 			send(msg.chat_id_, msg.id_, 1, '*> Bot Commands Has Been Locked*\n`[Now All Members Can`t Use Normal Commands.]`', 1, 'md')
 			database:set('bot:cmds:mods'..msg.chat_id_,true)
-		end
-			if lockpt[2] == "cmd owner" then
-			send(msg.chat_id_, msg.id_, 1, '*> Bot Commands Has Been Locked*\n`[Now All Members Can`t Use Normal/Mods Commands.]`', 1, 'md')
-			database:set('bot:cmds:owner'..msg.chat_id_,true)
       end
 	-----------------------------------------------------------------------------------------------
 	if text:match("^[#!/]setflood (%d+)$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
