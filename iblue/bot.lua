@@ -2799,12 +2799,6 @@ local pin_id = database:get('pinnedmsg'..msg.chat_id_)
        delete_msg(msg.chat_id_,msgs)
 	end
    end
-      if not is_mod(result.sender_user_id_, result.chat_id_) then
-	if text:match('bot:word') then
-    local msgs = {[0] = data.message_id_}
-       delete_msg(msg.chat_id_,msgs)
-	end
-   end
    if database:get('bot:arabic:mute'..result.chat_id_) and not is_mod(result.sender_user_id_, result.chat_id_) then
 	if text:match("[\216-\219][\128-\191]") then
     local msgs = {[0] = data.message_id_}
