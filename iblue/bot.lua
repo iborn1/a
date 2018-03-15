@@ -2604,7 +2604,7 @@ else
 			send(msg.chat_id_, msg.id_, 1, '*All Message Deleted.*', 1, 'md')
     end
 	-----------------------------------------------------------------------------------------------
-   if text:match("^[#!/]me$") then
+   if text:match("^[#!/]me$") or text:match("^[Mm]e$") then
       if is_iborn(msg) then
 	  t = '`Developer 🌟`'
       elseif is_admin(msg.sender_user_id_) then
