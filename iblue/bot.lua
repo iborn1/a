@@ -2619,6 +2619,20 @@ else
          send(msg.chat_id_, msg.id_, 1, '*Your ID >* *'..msg.sender_user_id_..'*\nYour Rank is: '..t, 1, 'md')
     end
    -----------------------------------------------------------------------------------------------
+   if text:match("^[#!/]info$") or text:match("^[Ii]nfo$") then
+      if is_iborn(msg) then
+	  t = '`Developer 🌟`'
+      elseif is_admin(msg.sender_user_id_) then
+	  t = '*Global Admin*⭐️'
+      elseif is_owner(msg.sender_user_id_, msg.chat_id_) then
+	  t = '*Group Owner*'
+      elseif is_mod(msg.sender_user_id_, msg.chat_id_) then
+	  t = '*Moderator*'
+      else
+	  t = '*Member*'
+	  end
+		send(msg.chat_id_, msg.id_,1, '*Group ID >*  *'..msg.chat_id_..'*\n*Group Name >* *'..msg.chat_name_..'*\n*Message ID >* *'..msg.id_..'*\n\n*Your FirstName >* *'..result.first_name_..'*\n*Your LastName >* *'..result.last_name_..'*\n*Username >* *'..result.username_..'*\n*ID >* *'msg.sender_user_id_'*\n*Your Rank >* '..t ,1 , 'md')
+   -----------------------------------------------------------------------------------------------
    if text:match("^[#!/]pin$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
         local id = msg.id_
         local msgs = {[0] = id}
