@@ -2631,8 +2631,8 @@ else
       else
 	  t = '*Member*'
 	  end
-		send(msg.chat_id_, msg.id_, 1, '*Group ID >*  *'..msg.chat_id_..'*\n*Group Name >* *'..msg.chat_name_..'*\n*Message ID >* *'..msg.id_..'*\n\n*Your FirstName >* *'..result.first_name_..'*\n*Your LastName >* *'..result.last_name_..'*\n*Username >* *'..result.username_..'*\n*ID >* *'msg.sender_user_id_'*\n*Your Rank >* '..t ,1 , 'md')
-   end
+		send(msg.chat_id_, msg.id_, 1, 'tttt', 1, 'md')
+    end
    -----------------------------------------------------------------------------------------------
    if text:match("^[#!/]pin$") and is_mod(msg.sender_user_id_, msg.chat_id_) then
         local id = msg.id_
